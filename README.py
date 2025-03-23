@@ -148,3 +148,54 @@ nombre = ""
 cedula = ""
 correo = ""
 InicioSesion()
+
+def registroProductos():
+    global valorInven, inventario
+    registroproductos = int(input("¿Cuantos productos desea registrar? "))
+    contador = 0
+    valorInven = 0
+    inventario = 0
+    productos = []
+    while contador < registroproductos:
+        nombreProducto = input("Ingrese el nombre del producto: ")
+        precioProducto = float(input("Ingrese el precio del producto: "))
+        cantidadProducto = int(input("Ingrese la cantidad de productos: "))
+        valorInven += precioProducto * cantidadProducto
+        inventario += cantidadProducto
+        productos.append((nombreProducto, precioProducto, cantidadProducto))
+        contador += 1
+    print("Productos registrados con éxito")
+    return productos
+def Menu():
+    print("Bienvenido al menú principal")
+    print("1. Registrar productos")
+    print("2. Revisar inventario")
+    opcion = int(input("Seleccione una opción: "))
+    if opcion == 1:
+        menu2()
+    elif opcion == 2:
+        menu3()
+    else:
+        print("Opción inválida. Saliendo del sistema...")
+        exit()
+
+Menu()
+     
+def menu2(): #registro de productos
+    RespuestaMenu2 = int(input("¿Desea registrar un producto? 1. Si 2. No "))
+    if RespuestaMenu2 == 1:
+        registroProductos()
+def menu3(): #revisar inventario
+    global valorInven, inventario
+    if inventario == 0:
+        print("No se han registrado productos. Por favor regístrelos primero.")
+        registroProductos()
+
+    print("La cantidad de productos en inventario es de:", inventario)
+    print("El valor del inventario es de:", valorInven)
+    YesNOt = input("¿Desea regresar al menú principal? Si/No: ")
+    if YesNOt.lower() == "si":
+        Menu()
+    else:
+        print("Saliendo del sistema...")
+        exit()
