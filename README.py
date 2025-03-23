@@ -1,4 +1,6 @@
 # yes
+
+hola
 proyecto
 # menu 4
 def Factura2(SubTotal, montodescuento, Total):
