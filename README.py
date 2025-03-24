@@ -3,6 +3,28 @@
 hola
 proyecto
 # menu 4
+'''
+Algoritmo
+
+'''
+def RegistroProducto():
+    global producto, precioProd, cantidadProductos, Inventario, valorInven
+    regProductos = int(input("Ingrese la cantidad de artículos a Registrar "))
+    contador = 0
+    valorInven = 0
+
+    while contador < regProductos:
+        producto = input("Ingrese el nombre del producto: ")
+        cantidadProductos = int(input("Ingrese la cantidad de productos: "))
+        precioProd = int(input("Ingrese el precio del producto: "))
+        precioProductos = precioProd * cantidadProductos
+        valorInven = valorInven + precioProductos
+        Inventario = Inventario + cantidadProductos
+        contador = contador + 1
+    print("Productos registrados con éxito")
+    return producto, precioProd, cantidadProductos, valorInven, Inventario
+
+# menu 4
 def Factura2(SubTotal, montodescuento, Total):
     global nombre, cedula, correo
     
@@ -107,11 +129,29 @@ def registroUsuario():
     
 def menu2():
     print("--------Registro de Productos--------")
-    print("funca x2")
-
+    RespuestaMenu2 = int(input("¿Desea registrar un producto? 1. Si 2. No "))
+    if RespuestaMenu2 == 1:
+        RegistroProducto()
+    else:
+        Menu()
+    Menu()
+    
 def menu3():
     print("--------Revisar Inventario--------")
-    print("funca x2")
+    global producto, precioProd, cantidadProductos, Inventario, valorInven     
+    if producto == "" or precioProd == 0 or cantidadProductos == 0:
+        print("No se ha registrado productos. Por favor, regístrelos primero.")
+        producto, precioProd, cantidadProductos, valorInven, Inventario = RegistroProducto()
+
+    print("La cantidad de productos en inventario es de:", Inventario)
+    print("El valor del inventario es de:", valorInven)
+    
+    YesNOt = input("¿Desea regresar al menú principal? S/N ")
+    if YesNOt == "S":
+        Menu()
+    else:
+        print("Saliendo del sistema...")
+        exit()
 
 def menu1():
     print("--------Registro de Usuario--------")
@@ -142,60 +182,12 @@ def Menu():
         print("Opción no válida")
         Menu()
         
-    print("funca x2")
-
+producto = ""
+precioProd = 0
+cantidadProductos = 0
+Inventario = 0
+valorInven = 0
 nombre = ""
 cedula = ""
 correo = ""
 InicioSesion()
-
-def registroProductos():
-    global valorInven, inventario
-    registroproductos = int(input("¿Cuantos productos desea registrar? "))
-    contador = 0
-    valorInven = 0
-    inventario = 0
-    productos = []
-    while contador < registroproductos:
-        nombreProducto = input("Ingrese el nombre del producto: ")
-        precioProducto = float(input("Ingrese el precio del producto: "))
-        cantidadProducto = int(input("Ingrese la cantidad de productos: "))
-        valorInven += precioProducto * cantidadProducto
-        inventario += cantidadProducto
-        productos.append((nombreProducto, precioProducto, cantidadProducto))
-        contador += 1
-    print("Productos registrados con éxito")
-    return productos
-def Menu():
-    print("Bienvenido al menú principal")
-    print("1. Registrar productos")
-    print("2. Revisar inventario")
-    opcion = int(input("Seleccione una opción: "))
-    if opcion == 1:
-        menu2()
-    elif opcion == 2:
-        menu3()
-    else:
-        print("Opción inválida. Saliendo del sistema...")
-        exit()
-
-Menu()
-     
-def menu2(): #registro de productos
-    RespuestaMenu2 = int(input("¿Desea registrar un producto? 1. Si 2. No "))
-    if RespuestaMenu2 == 1:
-        registroProductos()
-def menu3(): #revisar inventario
-    global valorInven, inventario
-    if inventario == 0:
-        print("No se han registrado productos. Por favor regístrelos primero.")
-        registroProductos()
-
-    print("La cantidad de productos en inventario es de:", inventario)
-    print("El valor del inventario es de:", valorInven)
-    YesNOt = input("¿Desea regresar al menú principal? Si/No: ")
-    if YesNOt.lower() == "si":
-        Menu()
-    else:
-        print("Saliendo del sistema...")
-        exit()
